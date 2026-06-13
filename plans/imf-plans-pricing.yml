@@ -1,0 +1,36 @@
+name: IMF Data API Plans and Pricing
+description: The IMF Data API is a free, publicly available service provided by the International Monetary Fund. There are no paid tiers or subscription plans. All data is accessible at no cost as part of the IMF's mandate to provide open access to international financial and economic statistics.
+url: https://www.imf.org/en/Data
+created: '2026-06-13'
+modified: '2026-06-13'
+
+plans:
+  - name: Public Access
+    description: Free and unrestricted access to all publicly available IMF datasets through the SDMX 3.0 Data API. No registration or API key required. Supports access to hundreds of datasets covering macroeconomic indicators, balance of payments, exchange rates, fiscal data, monetary statistics, and more across all IMF member countries.
+    url: https://data.imf.org/
+    price: Free
+    pricingModel: Free
+    rateLimit:
+      requests: 50
+      period: second
+      unit: requests per second (application-based)
+    features:
+      - Access to all public IMF datasets
+      - SDMX 3.0 JSON and XML formats
+      - Dataflow discovery and metadata
+      - Dimension filtering by country, frequency, and indicator
+      - Historical data from 1948 to present
+      - No API key or registration required
+      - No data download limits
+    authentication: None required
+    datasets:
+      - International Financial Statistics (IFS)
+      - World Economic Outlook (WEO)
+      - Fiscal Monitor (FM)
+      - Government Finance Statistics (GFS)
+      - Monetary and Financial Statistics (MFS)
+      - Balance of Payments (BOP)
+      - Direct Investment (DIP)
+      - Public Sector Balance Sheet (PSBS)
+      - Producer Price Index (PPI)
+      - Coordinated Portfolio Investment Survey (CPIS)

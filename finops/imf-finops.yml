@@ -1,0 +1,54 @@
+name: IMF Data API FinOps
+description: The IMF Data API is provided free of charge by the International Monetary Fund as part of its public data dissemination mandate. There are no direct costs associated with using the API. FinOps considerations are limited to the infrastructure and engineering costs of consuming and storing the data on the client side.
+url: https://www.imf.org/en/Data
+created: '2026-06-13'
+modified: '2026-06-13'
+
+costs:
+  direct:
+    apiAccessFee: $0.00
+    perRequestCost: $0.00
+    subscriptionCost: $0.00
+    authenticationCost: $0.00
+    description: The IMF Data API is entirely free. No API keys, subscriptions, or per-request fees apply.
+
+  indirect:
+    description: While the API itself is free, consumers should account for the following infrastructure and operational costs on their own infrastructure.
+    items:
+      - name: Compute Costs
+        description: Processing and transforming SDMX JSON responses, particularly for large datasets like IFS or WEO, may require significant CPU for parsing and normalization.
+
+      - name: Storage Costs
+        description: IMF datasets can be large. Storing historical time series data for all countries and indicators locally or in a data warehouse incurs storage costs that vary by provider.
+
+      - name: Bandwidth Costs
+        description: Pulling large datasets such as full WEO or IFS histories generates significant egress traffic if run in cloud environments that charge for outbound data transfer.
+
+      - name: Engineering Costs
+        description: Integration work to map SDMX 3.0 dimension structures, codelist lookups, and time period formats into downstream data pipelines requires engineering investment.
+
+      - name: Caching Infrastructure
+        description: Implementing request caching to stay within the 50 req/s rate limit and reduce redundant API calls may require additional caching infrastructure (Redis, local disk, etc.).
+
+optimization:
+  - strategy: Request Caching
+    description: Cache structure metadata (dataflows, codelists, data structures) aggressively as these change infrequently. Cache data responses for at least 24 hours for most datasets.
+
+  - strategy: Selective Dimension Filtering
+    description: Filter by specific countries, frequencies, and indicators rather than pulling full wildcard datasets to reduce response size and processing overhead.
+
+  - strategy: Incremental Updates
+    description: Use start_period and end_period parameters to fetch only new data since the last pull rather than re-downloading full historical series on every refresh.
+
+  - strategy: User-Agent Isolation
+    description: Set a unique descriptive User-Agent header per application to ensure each application has its own rate limit bucket, avoiding shared throttling across multiple consuming services.
+
+datasets:
+  - name: International Financial Statistics (IFS)
+    description: Large comprehensive dataset; consider pulling by country or indicator subset rather than full dataset.
+  - name: World Economic Outlook (WEO)
+    description: Released twice yearly (April and October). Cache between releases.
+  - name: Fiscal Monitor (FM)
+    description: Released twice yearly. Relatively compact dataset.
+  - name: Government Finance Statistics (GFS)
+    description: Annual frequency; cache aggressively.

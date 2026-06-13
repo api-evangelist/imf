@@ -1,0 +1,33 @@
+name: IMF Data API Rate Limits
+description: The IMF Data API enforces application-based rate limiting at 50 requests per second, identified by the User-Agent header. There are no per-user or per-key limits since authentication is not required. Clients are encouraged to set a descriptive User-Agent string to avoid being throttled collectively with other anonymous clients.
+url: https://datahelp.imf.org/knowledgebase/articles/667294-using-json-restful-web-service
+created: '2026-06-13'
+modified: '2026-06-13'
+
+rateLimits:
+  - name: Application Rate Limit
+    description: The IMF API limits requests at 50 per second, tracked by the application User-Agent header string. Applications that do not set a custom User-Agent share the same rate limit bucket, which increases the chance of being throttled. Setting a descriptive User-Agent is strongly recommended.
+    limit: 50
+    period: second
+    unit: requests
+    scope: application (User-Agent based)
+    enforcement: HTTP 429 Too Many Requests
+
+  - name: Retry Policy
+    description: When rate limited or encountering transient errors, clients should implement exponential backoff retry logic. The recommended maximum retry attempts is 10 before failing permanently.
+    maxRetries: 10
+    strategy: exponential backoff
+    timeout: 30 seconds per request
+
+notes:
+  - Authentication is not required for any public IMF data endpoints.
+  - Rate limits are enforced at the application level based on the User-Agent HTTP header.
+  - Setting a unique, descriptive User-Agent string for each application is recommended to avoid sharing rate limit quota with other anonymous clients.
+  - There are no daily or monthly request volume caps documented for the public API.
+  - The legacy SDMX_JSON service at dataservices.imf.org may have different rate limiting behavior.
+
+legacyApi:
+  name: Legacy SDMX JSON Service
+  baseUrl: http://dataservices.imf.org/REST/SDMX_JSON.svc
+  description: The older IMF SDMX JSON 2.1 service. Now superseded by the SDMX 3.0 API but still operational. Rate limits are not explicitly documented for this service.
+  status: Deprecated (still operational)

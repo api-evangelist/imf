@@ -1,0 +1,64 @@
+aid: imf
+name: IMF Data
+description: International Monetary Fund data REST API for accessing financial statistics, economic indicators, balance of payments, exchange rates, and international financial data. The API follows the SDMX 3.0 standard and provides access to hundreds of datasets covering macroeconomic indicators, fiscal monitor data, monetary and financial statistics, government finance statistics, and balance of payments across IMF member countries.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/imf/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Financial Data
+  - Economic Indicators
+  - Balance of Payments
+  - Exchange Rates
+  - International Finance
+  - SDMX
+  - Macroeconomics
+  - Fiscal Policy
+  - Monetary Statistics
+  - Government Finance
+
+apis:
+  - name: IMF SDMX 3.0 Data API
+    description: The IMF SDMX 3.0 Data API provides programmatic access to hundreds of IMF statistical datasets including International Financial Statistics (IFS), World Economic Outlook (WEO), Fiscal Monitor (FM), Government Finance Statistics (GFS), Monetary and Financial Statistics (MFS), Balance of Payments (BOP), and more. No authentication is required for public data access.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://data.imf.org/
+    baseURL: https://api.imf.org/external/sdmx/3.0
+    tags:
+      - Financial Data
+      - Economic Indicators
+      - SDMX
+      - International Finance
+    properties:
+      - type: Documentation
+        url: https://datahelp.imf.org/knowledgebase/articles/667294-using-json-restful-web-service
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/imf/refs/heads/main/openapi.yml
+
+common:
+  - type: Website
+    url: https://www.imf.org/en/Data
+  - type: Documentation
+    url: https://datahelp.imf.org/knowledgebase/articles/667294-using-json-restful-web-service
+  - type: GitHubOrg
+    url: https://github.com/IMFStatistics
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/international-monetary-fund
+  - type: Blog
+    url: https://www.imf.org/en/Blogs
+  - type: Pricing
+    url: https://www.imf.org/en/Data
+  - type: StatusPage
+    url: https://data.imf.org/
+  - type: X
+    url: https://x.com/IMFData
+  - type: Plans
+    url: plans/imf-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/imf-rate-limits.yml
+  - type: FinOps
+    url: finops/imf-finops.yml
+
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
