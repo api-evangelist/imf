@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/imf/refs/heads/main/json-schema/codelist.json",
+  "title": "Codelist",
+  "description": "A list of valid codes for a dimension in an IMF SDMX dataset",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Codelist identifier",
+      "examples": ["CL_COUNTRY", "CL_FREQ", "CL_INDICATOR_IFS"]
+    },
+    "agencyID": {
+      "type": "string",
+      "description": "Owning agency identifier",
+      "examples": ["IMF.STA", "IMF"]
+    },
+    "version": {
+      "type": "string",
+      "description": "Codelist version"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable codelist name",
+      "examples": ["Country", "Frequency", "IFS Indicator"]
+    },
+    "codes": {
+      "type": "array",
+      "description": "Array of valid code entries",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Code value used in API queries",
+            "examples": ["USA", "GBR", "A", "Q", "M", "PCPI"]
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable label for the code",
+            "examples": ["United States", "United Kingdom", "Annual", "Quarterly", "Monthly"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Extended description of the code"
+          },
+          "parent": {
+            "type": "string",
+            "description": "Parent code ID for hierarchical codelists"
+          }
+        },
+        "required": ["id", "name"]
+      }
+    }
+  },
+  "required": ["id", "agencyID", "codes"]
+}

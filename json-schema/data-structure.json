@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/imf/refs/heads/main/json-schema/data-structure.json",
+  "title": "DataStructure",
+  "description": "Data structure definition (DSD) for an IMF SDMX dataset",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Data structure definition identifier",
+      "examples": ["DSD_GFS", "DSD_IFS", "DSD_FM"]
+    },
+    "agencyID": {
+      "type": "string",
+      "description": "Owning agency identifier",
+      "examples": ["IMF.STA", "IMF"]
+    },
+    "dataStructureComponents": {
+      "type": "object",
+      "description": "Components making up the data structure",
+      "properties": {
+        "dimensionList": {
+          "type": "object",
+          "description": "List of dimensions defining the key",
+          "properties": {
+            "dimensions": {
+              "type": "array",
+              "description": "Regular dimensions",
+              "items": {
+                "$ref": "#/$defs/Dimension"
+              }
+            },
+            "timeDimensions": {
+              "type": "array",
+              "description": "Time dimensions",
+              "items": {
+                "$ref": "#/$defs/Dimension"
+              }
+            }
+          }
+        },
+        "measureList": {
+          "type": "object",
+          "description": "List of measures (observation values)",
+          "properties": {
+            "measures": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Dimension"
+              }
+            }
+          }
+        },
+        "attributeList": {
+          "type": "object",
+          "description": "List of attributes attached to data"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Dimension": {
+      "type": "object",
+      "description": "A dimension, measure, or attribute in the data structure",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Dimension identifier",
+          "examples": ["COUNTRY", "FREQUENCY", "TIME_PERIOD", "OBS_VALUE"]
+        },
+        "position": {
+          "type": "integer",
+          "description": "Position in the dot-separated key string (1-indexed)",
+          "minimum": 1,
+          "examples": [1, 2, 3]
+        },
+        "type": {
+          "type": "string",
+          "description": "Dimension classification",
+          "enum": ["Dimension", "TimeDimension", "Measure"]
+        },
+        "conceptIdentity": {
+          "type": "string",
+          "description": "URN reference to the concept definition"
+        },
+        "localRepresentation": {
+          "type": "object",
+          "description": "Codelist or format constraining this dimension"
+        }
+      },
+      "required": ["id"]
+    }
+  },
+  "required": ["id", "agencyID"]
+}

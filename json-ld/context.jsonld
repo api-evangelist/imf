@@ -1,0 +1,96 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "imf": "https://data.imf.org/vocabulary#",
+    "sdmx": "https://sdmx.org/wp-content/uploads/SDMX_3-0-0_SECTION_2_FINAL-1_0.pdf#",
+    "dcat": "https://www.w3.org/ns/dcat#",
+    "dct": "http://purl.org/dc/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+
+    "Dataflow": "imf:Dataflow",
+    "DataStructure": "imf:DataStructure",
+    "Dimension": "imf:Dimension",
+    "Codelist": "imf:Codelist",
+    "Code": "imf:Code",
+    "DataMessage": "imf:DataMessage",
+    "DataSet": "imf:DataSet",
+    "Series": "imf:Series",
+    "Observation": "imf:Observation",
+
+    "id": "@id",
+    "agencyID": "dct:publisher",
+    "version": "dct:hasVersion",
+    "name": "dct:title",
+    "description": "dct:description",
+    "structure": "imf:hasStructure",
+
+    "dataflows": {
+      "@id": "imf:hasDataflow",
+      "@container": "@set"
+    },
+    "dataStructures": {
+      "@id": "imf:hasDataStructure",
+      "@container": "@set"
+    },
+    "codelists": {
+      "@id": "imf:hasCodelist",
+      "@container": "@set"
+    },
+    "codes": {
+      "@id": "skos:member",
+      "@container": "@set"
+    },
+    "dimensions": {
+      "@id": "imf:hasDimension",
+      "@container": "@set"
+    },
+    "timeDimensions": {
+      "@id": "imf:hasTimeDimension",
+      "@container": "@set"
+    },
+    "measures": {
+      "@id": "imf:hasMeasure",
+      "@container": "@set"
+    },
+    "position": "imf:dimensionPosition",
+    "conceptIdentity": "imf:conceptIdentity",
+    "keyPosition": "imf:keyPosition",
+    "observations": "imf:hasObservations",
+    "dataSets": {
+      "@id": "imf:hasDataSet",
+      "@container": "@set"
+    },
+    "series": "imf:hasSeries",
+    "action": "imf:datasetAction",
+
+    "meta": "imf:messageMeta",
+    "prepared": {
+      "@id": "dct:created",
+      "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+    },
+    "sender": "dct:creator",
+    "schema": "imf:messageSchema",
+
+    "OBS_VALUE": "imf:observationValue",
+    "TIME_PERIOD": "imf:timePeriod",
+    "FREQ": "imf:frequency",
+    "REF_AREA": "imf:referenceArea",
+    "INDICATOR": "imf:indicator",
+    "COUNTRY": "imf:country",
+    "OBS_STATUS": "imf:observationStatus",
+
+    "IFS": "imf:dataset/IFS",
+    "WEO": "imf:dataset/WEO",
+    "FM": "imf:dataset/FM",
+    "GFS": "imf:dataset/GFS",
+    "MFS": "imf:dataset/MFS",
+    "BOP": "imf:dataset/BOP",
+
+    "links": {
+      "@id": "rdfs:seeAlso",
+      "@container": "@set"
+    },
+    "href": "@id",
+    "rel": "dct:relation"
+  }
+}

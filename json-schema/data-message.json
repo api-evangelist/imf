@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/imf/refs/heads/main/json-schema/data-message.json",
+  "title": "DataMessage",
+  "description": "SDMX 3.0 JSON data message returned by IMF data queries containing time-series observations",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "Message metadata",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "description": "SDMX JSON schema URI"
+        },
+        "id": {
+          "type": "string",
+          "description": "Message unique identifier"
+        },
+        "test": {
+          "type": "boolean",
+          "description": "Whether this is a test message"
+        },
+        "prepared": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the message was prepared"
+        },
+        "sender": {
+          "type": "object",
+          "description": "Sender information",
+          "properties": {
+            "id": { "type": "string" },
+            "name": { "type": "string" }
+          }
+        }
+      }
+    },
+    "data": {
+      "type": "object",
+      "description": "Data payload",
+      "properties": {
+        "structures": {
+          "type": "array",
+          "description": "Structure references needed to interpret the data",
+          "items": {
+            "type": "object",
+            "properties": {
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "href": { "type": "string", "format": "uri" },
+                    "rel": { "type": "string" }
+                  }
+                }
+              },
+              "dimensions": {
+                "type": "object",
+                "description": "Dimension references with their positions",
+                "properties": {
+                  "dataset": { "type": "array", "items": { "type": "object" } },
+                  "series": { "type": "array", "items": { "type": "object" } },
+                  "observation": { "type": "array", "items": { "type": "object" } }
+                }
+              },
+              "attributes": {
+                "type": "object",
+                "description": "Attribute references"
+              },
+              "measures": {
+                "type": "object",
+                "description": "Measure references"
+              }
+            }
+          }
+        },
+        "dataSets": {
+          "type": "array",
+          "description": "Data sets containing the actual observations",
+          "items": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string",
+                "description": "Action associated with this dataset (e.g., Information)",
+                "enum": ["Append", "Replace", "Delete", "Information"]
+              },
+              "series": {
+                "type": "object",
+                "description": "Map of series key to series data",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "attributes": {
+                      "type": "array",
+                      "description": "Series-level attribute values"
+                    },
+                    "observations": {
+                      "type": "object",
+                      "description": "Map of observation key to observation values",
+                      "additionalProperties": {
+                        "type": "array",
+                        "description": "Array of [value, ...attributes] for this observation"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["data"]
+}

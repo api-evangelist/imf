@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/imf/refs/heads/main/json-schema/dataflow.json",
+  "title": "Dataflow",
+  "description": "An IMF dataset definition in the SDMX 3.0 structure",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique dataflow identifier (e.g., IFS, GFS, FM, WEO, MFS, BOP)",
+      "examples": ["FM", "IFS", "GFS", "WEO", "MFS", "BOP"]
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable dataset name",
+      "examples": ["Fiscal Monitor", "International Financial Statistics"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed dataset description"
+    },
+    "version": {
+      "type": "string",
+      "description": "Dataflow version",
+      "examples": ["8.0.1", "1.0.0"]
+    },
+    "agencyID": {
+      "type": "string",
+      "description": "Owning agency identifier",
+      "examples": ["IMF.STA", "IMF"]
+    },
+    "structure": {
+      "type": "string",
+      "description": "URN reference to the associated data structure definition",
+      "examples": ["urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF.STA:DSD_FM(8.0.1)"]
+    }
+  },
+  "required": ["id", "agencyID"]
+}

@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/3.0.0/sdmx-json-data-schema.json",
+    "id": "response-ifs-usa-cpi",
+    "prepared": "2026-06-13T00:00:00Z",
+    "sender": {
+      "id": "IMF",
+      "name": "International Monetary Fund"
+    }
+  },
+  "data": {
+    "structures": [
+      {
+        "links": [
+          {
+            "href": "https://api.imf.org/external/sdmx/3.0/structure/datastructure/IMF.STA/DSD_IFS/+",
+            "rel": "datastructure"
+          }
+        ],
+        "dimensions": {
+          "dataset": [],
+          "series": [
+            {
+              "id": "FREQ",
+              "name": "Frequency",
+              "keyPosition": 0,
+              "values": [
+                { "id": "A", "name": "Annual" }
+              ]
+            },
+            {
+              "id": "REF_AREA",
+              "name": "Reference Area",
+              "keyPosition": 1,
+              "values": [
+                { "id": "US", "name": "United States" }
+              ]
+            },
+            {
+              "id": "INDICATOR",
+              "name": "Indicator",
+              "keyPosition": 2,
+              "values": [
+                { "id": "PCPI", "name": "Prices, Consumer Price Index, All items, Index" }
+              ]
+            }
+          ],
+          "observation": [
+            {
+              "id": "TIME_PERIOD",
+              "name": "Time Period",
+              "keyPosition": 0,
+              "values": [
+                { "id": "2019", "name": "2019" },
+                { "id": "2020", "name": "2020" },
+                { "id": "2021", "name": "2021" },
+                { "id": "2022", "name": "2022" },
+                { "id": "2023", "name": "2023" }
+              ]
+            }
+          ]
+        },
+        "attributes": {
+          "observation": [
+            {
+              "id": "OBS_STATUS",
+              "name": "Observation Status",
+              "values": [
+                { "id": "A", "name": "Normal value" }
+              ]
+            }
+          ]
+        },
+        "measures": {
+          "observation": [
+            {
+              "id": "OBS_VALUE",
+              "name": "Observation Value"
+            }
+          ]
+        }
+      }
+    ],
+    "dataSets": [
+      {
+        "action": "Information",
+        "series": {
+          "0:0:0": {
+            "attributes": [],
+            "observations": {
+              "0": [256.143, 0],
+              "1": [258.811, 0],
+              "2": [270.970, 0],
+              "3": [292.655, 0],
+              "4": [304.702, 0]
+            }
+          }
+        }
+      }
+    ]
+  }
+}

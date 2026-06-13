@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/3.0.0/sdmx-json-data-schema.json",
+    "id": "response-dataflows",
+    "prepared": "2026-06-13T00:00:00Z",
+    "sender": {
+      "id": "IMF",
+      "name": "International Monetary Fund"
+    }
+  },
+  "data": {
+    "dataflows": [
+      {
+        "id": "IFS",
+        "agencyID": "IMF.STA",
+        "version": "3.0.0",
+        "name": "International Financial Statistics",
+        "description": "Monthly, quarterly, and annual data on financial, balance of payments, and macroeconomic indicators for most IMF member countries.",
+        "structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF.STA:DSD_IFS(3.0.0)"
+      },
+      {
+        "id": "FM",
+        "agencyID": "IMF.STA",
+        "version": "8.0.1",
+        "name": "Fiscal Monitor",
+        "description": "Annual fiscal data on government revenue, expenditure, balances, and debt for advanced economies, emerging markets, and low-income developing countries.",
+        "structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF.STA:DSD_FM(8.0.1)"
+      },
+      {
+        "id": "WEO",
+        "agencyID": "IMF.STA",
+        "version": "2.0.0",
+        "name": "World Economic Outlook",
+        "description": "Annual and semi-annual projections for key economic indicators including GDP growth, inflation, unemployment, and current account balances.",
+        "structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF.STA:DSD_WEO(2.0.0)"
+      },
+      {
+        "id": "GFS",
+        "agencyID": "IMF.STA",
+        "version": "2.0.0",
+        "name": "Government Finance Statistics",
+        "description": "Comprehensive government finance statistics covering revenue, expense, transactions in assets and liabilities, and other economic flows.",
+        "structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF.STA:DSD_GFS(2.0.0)"
+      },
+      {
+        "id": "BOP",
+        "agencyID": "IMF.STA",
+        "version": "2.0.0",
+        "name": "Balance of Payments",
+        "description": "Balance of payments statistics covering current account, capital account, and financial account transactions.",
+        "structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF.STA:DSD_BOP(2.0.0)"
+      },
+      {
+        "id": "MFS",
+        "agencyID": "IMF.STA",
+        "version": "2.0.0",
+        "name": "Monetary and Financial Statistics",
+        "description": "Monetary survey data, interest rates, and financial indicators for central banks and other depository corporations.",
+        "structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF.STA:DSD_MFS(2.0.0)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "@context": "https://raw.githubusercontent.com/api-evangelist/imf/refs/heads/main/json-ld/context.jsonld",
+  "@type": "WebAPI",
+  "@id": "https://api.imf.org/external/sdmx/3.0",
+  "name": "IMF SDMX 3.0 Data API",
+  "description": "The International Monetary Fund SDMX 3.0 Data API provides free programmatic access to hundreds of IMF statistical datasets covering macroeconomic indicators, fiscal data, balance of payments, exchange rates, and international financial statistics for IMF member countries.",
+  "url": "https://data.imf.org/",
+  "documentation": "https://datahelp.imf.org/knowledgebase/articles/667294-using-json-restful-web-service",
+  "termsOfService": "https://www.imf.org/external/terms.htm",
+  "provider": {
+    "@type": "Organization",
+    "@id": "https://www.imf.org",
+    "name": "International Monetary Fund",
+    "url": "https://www.imf.org",
+    "sameAs": [
+      "https://www.wikidata.org/wiki/Q28937",
+      "https://en.wikipedia.org/wiki/International_Monetary_Fund",
+      "https://www.linkedin.com/company/international-monetary-fund",
+      "https://x.com/IMFData"
+    ]
+  },
+  "hasAPI": [
+    {
+      "@type": "WebAPI",
+      "@id": "https://api.imf.org/external/sdmx/3.0",
+      "name": "IMF SDMX 3.0 Data API (Current)",
+      "description": "Current SDMX 3.0 compliant REST API for IMF statistical data",
+      "version": "3.0",
+      "standard": "SDMX 3.0"
+    },
+    {
+      "@type": "WebAPI",
+      "@id": "http://dataservices.imf.org/REST/SDMX_JSON.svc",
+      "name": "IMF SDMX JSON 2.1 API (Legacy)",
+      "description": "Legacy SDMX 2.1 JSON REST API, still available but superseded by 3.0",
+      "version": "2.1",
+      "standard": "SDMX 2.1"
+    }
+  ],
+  "availableDatasets": [
+    {
+      "@type": "Dataset",
+      "@id": "imf:dataset/IFS",
+      "identifier": "IFS",
+      "name": "International Financial Statistics",
+      "description": "Monthly, quarterly, and annual financial and macroeconomic data for most IMF member countries",
+      "keywords": ["financial statistics", "macroeconomics", "inflation", "exchange rates", "money supply"],
+      "temporalCoverage": "1948/",
+      "spatialCoverage": "Global — IMF member countries"
+    },
+    {
+      "@type": "Dataset",
+      "@id": "imf:dataset/WEO",
+      "identifier": "WEO",
+      "name": "World Economic Outlook",
+      "description": "Biannual economic projections for GDP, inflation, unemployment, and current account balances",
+      "keywords": ["GDP", "economic outlook", "projections", "inflation", "unemployment"],
+      "temporalCoverage": "1980/",
+      "spatialCoverage": "Global — IMF member countries"
+    },
+    {
+      "@type": "Dataset",
+      "@id": "imf:dataset/GFS",
+      "identifier": "GFS",
+      "name": "Government Finance Statistics",
+      "description": "Comprehensive government finance statistics including revenue, expenditure, and debt",
+      "keywords": ["government finance", "fiscal", "public debt", "revenue", "expenditure"],
+      "temporalCoverage": "1972/",
+      "spatialCoverage": "Global — IMF member countries"
+    },
+    {
+      "@type": "Dataset",
+      "@id": "imf:dataset/FM",
+      "identifier": "FM",
+      "name": "Fiscal Monitor",
+      "description": "Annual fiscal data and projections for government balances and debt",
+      "keywords": ["fiscal monitor", "fiscal policy", "government debt", "deficit"],
+      "temporalCoverage": "1990/",
+      "spatialCoverage": "Global — advanced economies, emerging markets, low-income countries"
+    },
+    {
+      "@type": "Dataset",
+      "@id": "imf:dataset/BOP",
+      "identifier": "BOP",
+      "name": "Balance of Payments",
+      "description": "International transactions data covering current, capital, and financial accounts",
+      "keywords": ["balance of payments", "current account", "trade", "foreign investment"],
+      "temporalCoverage": "1970/",
+      "spatialCoverage": "Global — IMF member countries"
+    },
+    {
+      "@type": "Dataset",
+      "@id": "imf:dataset/MFS",
+      "identifier": "MFS",
+      "name": "Monetary and Financial Statistics",
+      "description": "Data on monetary aggregates, interest rates, and financial sector balance sheets",
+      "keywords": ["monetary statistics", "money supply", "interest rates", "central bank"],
+      "temporalCoverage": "1970/",
+      "spatialCoverage": "Global — IMF member countries"
+    }
+  ],
+  "license": {
+    "@type": "CreativeWork",
+    "name": "IMF Data License",
+    "url": "https://www.imf.org/external/terms.htm"
+  }
+}

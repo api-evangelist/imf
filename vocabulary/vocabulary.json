@@ -1,0 +1,120 @@
+{
+  "vocabulary": {
+    "name": "IMF SDMX 3.0 Data API Vocabulary",
+    "description": "Key terms and concepts used in the IMF SDMX 3.0 Data API",
+    "source": "https://datahelp.imf.org/knowledgebase/articles/667294-using-json-restful-web-service",
+    "terms": [
+      {
+        "term": "SDMX",
+        "definition": "Statistical Data and Metadata eXchange — an ISO standard for the exchange of statistical data and metadata. The IMF API implements SDMX 3.0.",
+        "abbreviation": "SDMX",
+        "fullName": "Statistical Data and Metadata eXchange"
+      },
+      {
+        "term": "Dataflow",
+        "definition": "A named reference to a dataset in the IMF SDMX system. Each dataflow has an identifier (e.g., IFS, GFS, FM) and is associated with a data structure definition.",
+        "synonyms": ["dataset", "data series"]
+      },
+      {
+        "term": "DSD",
+        "definition": "Data Structure Definition — describes the structure of a dataflow including its dimensions, measures, and attributes and their order in the query key.",
+        "abbreviation": "DSD",
+        "fullName": "Data Structure Definition"
+      },
+      {
+        "term": "Dimension",
+        "definition": "A structural concept that, together with other dimensions, uniquely identifies an observation. Dimensions form the key for querying data (e.g., FREQ, REF_AREA, INDICATOR).",
+        "examples": ["FREQ", "REF_AREA", "INDICATOR", "COUNTRY", "TIME_PERIOD"]
+      },
+      {
+        "term": "Key",
+        "definition": "A dot-separated string of dimension values used to filter data in an API query. Use '+' to specify multiple values for a dimension and '*' to wildcard. Position corresponds to DSD dimension order.",
+        "examples": ["A.USA.PCPI", "A+Q.USA+GBR.*", "*.*.NGDP_RPCH"]
+      },
+      {
+        "term": "Codelist",
+        "definition": "A controlled list of codes (valid values) for a given dimension. For example, CL_COUNTRY contains all valid country codes, CL_FREQ contains frequency codes.",
+        "examples": ["CL_COUNTRY", "CL_FREQ", "CL_INDICATOR_IFS"]
+      },
+      {
+        "term": "Concept Scheme",
+        "definition": "A collection of concepts that define the meaning of dimensions and attributes. Concepts link dimensions to their semantic meaning.",
+        "abbreviation": "CS"
+      },
+      {
+        "term": "FREQ",
+        "definition": "Frequency dimension — specifies data collection frequency. Common values: A (Annual), Q (Quarterly), M (Monthly), W (Weekly), D (Daily).",
+        "values": {
+          "A": "Annual",
+          "Q": "Quarterly",
+          "M": "Monthly",
+          "W": "Weekly",
+          "D": "Daily",
+          "B": "Business day"
+        }
+      },
+      {
+        "term": "IFS",
+        "definition": "International Financial Statistics — IMF's primary dataset covering monthly, quarterly, and annual financial and macroeconomic data for most member countries.",
+        "fullName": "International Financial Statistics"
+      },
+      {
+        "term": "WEO",
+        "definition": "World Economic Outlook — biannual IMF publication and dataset with economic projections for GDP, inflation, unemployment, and current account balances.",
+        "fullName": "World Economic Outlook"
+      },
+      {
+        "term": "GFS",
+        "definition": "Government Finance Statistics — comprehensive annual data on government revenue, expenditure, and balance sheet for IMF member countries.",
+        "fullName": "Government Finance Statistics"
+      },
+      {
+        "term": "FM",
+        "definition": "Fiscal Monitor — IMF publication with annual fiscal data and projections for government revenue, spending, balances, and debt.",
+        "fullName": "Fiscal Monitor"
+      },
+      {
+        "term": "MFS",
+        "definition": "Monetary and Financial Statistics — data on monetary aggregates, interest rates, and financial institution balance sheets.",
+        "fullName": "Monetary and Financial Statistics"
+      },
+      {
+        "term": "BOP",
+        "definition": "Balance of Payments — statistics on international transactions covering the current account, capital account, and financial account.",
+        "fullName": "Balance of Payments"
+      },
+      {
+        "term": "OBS_VALUE",
+        "definition": "Observation Value — the numeric value of a data point at a specific combination of dimension values and time period."
+      },
+      {
+        "term": "TIME_PERIOD",
+        "definition": "The time dimension representing the reference period for an observation. Format depends on frequency: YYYY for annual, YYYY-QN for quarterly, YYYY-MM for monthly."
+      },
+      {
+        "term": "REF_AREA",
+        "definition": "Reference Area — the geographic or economic area for which data is reported. Typically ISO 3166-1 alpha-2 country codes or IMF-specific regional codes.",
+        "examples": ["US", "GB", "DE", "JP", "CN", "W00"]
+      },
+      {
+        "term": "Agency",
+        "definition": "The organization responsible for maintaining a structural artefact. IMF uses IMF.STA (IMF Statistics Department) and IMF as agency identifiers.",
+        "examples": ["IMF.STA", "IMF"]
+      },
+      {
+        "term": "dimensionAtObservation",
+        "definition": "Query parameter specifying which dimension varies at the observation level in the response. Default is TIME_PERIOD, which returns time-series data. Use AllDimensions for cross-sectional data."
+      },
+      {
+        "term": "PCPI",
+        "definition": "Consumer Price Index — a common IFS indicator measuring changes in the price level of consumer goods and services.",
+        "fullName": "Prices, Consumer Price Index, All items, Index"
+      },
+      {
+        "term": "NGDP_RPCH",
+        "definition": "Real GDP Growth — annual percentage change in real Gross Domestic Product, a key WEO indicator.",
+        "fullName": "Gross Domestic Product, Constant Prices, Percent Change"
+      }
+    ]
+  }
+}

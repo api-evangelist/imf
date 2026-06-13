@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/structure-message/tools/schemas/3.0.0/sdmx-json-structure-schema.json",
+    "id": "response-codelist-freq",
+    "prepared": "2026-06-13T00:00:00Z",
+    "sender": {
+      "id": "IMF",
+      "name": "International Monetary Fund"
+    }
+  },
+  "data": {
+    "codelists": [
+      {
+        "id": "CL_FREQ",
+        "agencyID": "IMF.STA",
+        "version": "1.0.0",
+        "name": "Frequency",
+        "description": "SDMX frequency dimension codelist for IMF datasets",
+        "codes": [
+          {
+            "id": "A",
+            "name": "Annual"
+          },
+          {
+            "id": "Q",
+            "name": "Quarterly"
+          },
+          {
+            "id": "M",
+            "name": "Monthly"
+          },
+          {
+            "id": "W",
+            "name": "Weekly"
+          },
+          {
+            "id": "D",
+            "name": "Daily"
+          },
+          {
+            "id": "B",
+            "name": "Business day"
+          }
+        ]
+      }
+    ]
+  }
+}
