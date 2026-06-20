@@ -1,7 +1,7 @@
 aid: imf
 name: IMF Data
 description: International Monetary Fund data REST API for accessing financial statistics, economic indicators, balance of payments, exchange rates, and international financial data. The API follows the SDMX 3.0 standard and provides access to hundreds of datasets covering macroeconomic indicators, fiscal monitor data, monetary and financial statistics, government finance statistics, and balance of payments across IMF member countries.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/imf/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -21,7 +21,7 @@ tags:
 apis:
   - name: IMF SDMX 3.0 Data API
     description: The IMF SDMX 3.0 Data API provides programmatic access to hundreds of IMF statistical datasets including International Financial Statistics (IFS), World Economic Outlook (WEO), Fiscal Monitor (FM), Government Finance Statistics (GFS), Monetary and Financial Statistics (MFS), Balance of Payments (BOP), and more. No authentication is required for public data access.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://data.imf.org/
     baseURL: https://api.imf.org/external/sdmx/3.0
     tags:
