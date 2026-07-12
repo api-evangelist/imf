@@ -36,6 +36,8 @@ apis:
         url: https://raw.githubusercontent.com/api-evangelist/imf/refs/heads/main/openapi.yml
 
 common:
+  - type: DomainSecurity
+    url: security/imf-domain-security.yml
   - type: Website
     url: https://www.imf.org/en/Data
   - type: Documentation
