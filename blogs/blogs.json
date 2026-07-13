@@ -2,11 +2,10 @@
   "repo": "imf",
   "feeds": [
     {
-      "source": "https://www.imf.org/en/Blogs",
-      "saved": 0,
-      "error": "HTTP 403 Forbidden on blog listing"
+      "source": "https://www.linkedin.com/company/international-monetary-fund",
+      "error": "HTTPError"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-27T12:47:48Z"
+  "fetched": "2026-07-11T11:50:51Z"
 }
