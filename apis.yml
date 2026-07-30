@@ -1,7 +1,19 @@
 aid: imf
 name: IMF Data
 description: International Monetary Fund data REST API for accessing financial statistics, economic indicators, balance of payments, exchange rates, and international financial data. The API follows the SDMX 3.0 standard and provides access to hundreds of datasets covering macroeconomic indicators, fiscal monitor data, monetary and financial statistics, government finance statistics, and balance of payments across IMF member countries.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/imf.png
 url: https://raw.githubusercontent.com/api-evangelist/imf/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -19,22 +31,31 @@ tags:
   - Government Finance
 
 apis:
-  - name: IMF SDMX 3.0 Data API
-    description: The IMF SDMX 3.0 Data API provides programmatic access to hundreds of IMF statistical datasets including International Financial Statistics (IFS), World Economic Outlook (WEO), Fiscal Monitor (FM), Government Finance Statistics (GFS), Monetary and Financial Statistics (MFS), Balance of Payments (BOP), and more. No authentication is required for public data access.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://data.imf.org/
-    baseURL: https://api.imf.org/external/sdmx/3.0
-    tags:
-      - Financial Data
-      - Economic Indicators
-      - SDMX
-      - International Finance
-    properties:
-      - type: Documentation
-        url: https://datahelp.imf.org/knowledgebase/articles/667294-using-json-restful-web-service
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/imf/refs/heads/main/openapi.yml
-
+- aid: imf:imf-data-api
+  name: IMF Data Data API
+  description: Retrieve actual statistical data observations from IMF datasets
+  humanURL: https://data.imf.org/
+  baseURL: https://api.imf.org/external/sdmx/3.0
+  tags:
+  - Data
+  properties:
+  - type: OpenAPI
+    url: openapi/imf-data-api-openapi.yml
+  - type: Documentation
+    url: https://datahelp.imf.org/knowledgebase/articles/667294-using-json-restful-web-service
+- aid: imf:imf-structure-api
+  name: IMF Data Structure API
+  description: >-
+    Retrieve dataset metadata including dataflows, data structures, codelists, and concept schemes
+  humanURL: https://data.imf.org/
+  baseURL: https://api.imf.org/external/sdmx/3.0
+  tags:
+  - Structure
+  properties:
+  - type: OpenAPI
+    url: openapi/imf-structure-api-openapi.yml
+  - type: Documentation
+    url: https://datahelp.imf.org/knowledgebase/articles/667294-using-json-restful-web-service
 common:
   - type: AgenticAccess
     url: agentic-access/imf-agentic-access.yml
