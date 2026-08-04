@@ -1,0 +1,449 @@
+openapi: 3.0.3
+info:
+  title: IMF SDMX 3.0 Data API
+  description: |
+    The International Monetary Fund (IMF) SDMX 3.0 Data API provides programmatic access
+    to hundreds of IMF statistical datasets. Data is freely available with no authentication
+    required. Datasets include International Financial Statistics (IFS), World Economic
+    Outlook (WEO), Fiscal Monitor (FM), Government Finance Statistics (GFS), Monetary and
+    Financial Statistics (MFS), Balance of Payments (BOP), and many more.
+
+    The API follows the SDMX 3.0 (Statistical Data and Metadata eXchange) standard.
+    Responses are available in JSON format.
+
+    Rate limit: 50 requests per second (application-based via User-Agent header).
+  version: '3.0'
+  contact:
+    name: IMF Data Help
+    url: https://datahelp.imf.org
+    email: sdmx@imf.org
+  license:
+    name: IMF Data License
+    url: https://www.imf.org/external/terms.htm
+  termsOfService: https://www.imf.org/external/terms.htm
+
+externalDocs:
+  description: IMF Data Help - Using JSON RESTful Web Service
+  url: https://datahelp.imf.org/knowledgebase/articles/667294-using-json-restful-web-service
+
+servers:
+  - url: https://api.imf.org/external/sdmx/3.0
+    description: IMF SDMX 3.0 API (current)
+  - url: http://dataservices.imf.org/REST/SDMX_JSON.svc
+    description: IMF SDMX JSON 2.1 API (legacy)
+
+tags:
+  - name: Structure
+    description: Retrieve dataset metadata including dataflows, data structures, codelists, and concept schemes
+  - name: Data
+    description: Retrieve actual statistical data observations from IMF datasets
+
+paths:
+  /structure/dataflow/all/*/+:
+    get:
+      summary: List all available IMF dataflows (datasets)
+      description: |
+        Returns all available dataflow definitions from the IMF SDMX API.
+        Each dataflow represents a dataset such as IFS, WEO, FM, GFS, MFS, etc.
+        Use the dataflow ID to query data and retrieve data structures.
+      operationId: listDataflows
+      tags:
+        - Structure
+      parameters:
+        - name: Accept
+          in: header
+          description: Response format
+          schema:
+            type: string
+            default: application/json
+      responses:
+        '200':
+          description: List of available dataflows
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      dataflows:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Dataflow'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  /structure/datastructure/{agency}/{dsd_id}/+:
+    get:
+      summary: Retrieve data structure definition (DSD) for a dataflow
+      description: |
+        Returns the data structure definition for a specific dataset, including
+        all dimensions, measures, attributes, and their positions.
+        Use this to understand how to build query keys for data requests.
+      operationId: getDataStructure
+      tags:
+        - Structure
+      parameters:
+        - name: agency
+          in: path
+          required: true
+          description: The agency that owns the data structure (e.g., IMF.STA, IMF)
+          schema:
+            type: string
+            example: IMF.STA
+        - name: dsd_id
+          in: path
+          required: true
+          description: The data structure definition identifier
+          schema:
+            type: string
+            example: DSD_GFS
+      responses:
+        '200':
+          description: Data structure definition
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      dataStructures:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DataStructure'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  /structure/codelist/{agency}/{codelist_id}/+:
+    get:
+      summary: Retrieve a codelist for a dimension
+      description: |
+        Returns all valid codes and their labels for a specified codelist.
+        Codelists are used to identify valid values for dimensions such as
+        COUNTRY (country codes), FREQUENCY (A=Annual, Q=Quarterly, M=Monthly),
+        and indicator codes specific to each dataset.
+      operationId: getCodelist
+      tags:
+        - Structure
+      parameters:
+        - name: agency
+          in: path
+          required: true
+          description: The agency that owns the codelist
+          schema:
+            type: string
+            example: IMF.STA
+        - name: codelist_id
+          in: path
+          required: true
+          description: The codelist identifier (e.g., CL_COUNTRY, CL_FREQ)
+          schema:
+            type: string
+            example: CL_COUNTRY
+      responses:
+        '200':
+          description: Codelist with codes and labels
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      codelists:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Codelist'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  /structure/conceptscheme/{agency}/{scheme_id}/+:
+    get:
+      summary: Retrieve a concept scheme
+      description: |
+        Returns concept definitions used to describe the meaning of dimensions
+        and attributes in IMF datasets.
+      operationId: getConceptScheme
+      tags:
+        - Structure
+      parameters:
+        - name: agency
+          in: path
+          required: true
+          description: The agency that owns the concept scheme
+          schema:
+            type: string
+            example: IMF
+        - name: scheme_id
+          in: path
+          required: true
+          description: The concept scheme identifier
+          schema:
+            type: string
+            example: CS_IFS
+      responses:
+        '200':
+          description: Concept scheme with concept definitions
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /data/dataflow/{agency}/{dataflow_id}/+/{key}:
+    get:
+      summary: Retrieve data observations from an IMF dataset
+      description: |
+        Returns time-series data observations for the specified dataflow filtered
+        by the dimension key. The key is a dot-separated string where each position
+        corresponds to a dimension in the dataset's data structure definition (DSD),
+        in positional order. Use '+' to specify multiple values for a dimension and
+        '*' or blank to wildcard a dimension.
+
+        Examples:
+        - `A.USA.PCPI` - Annual, USA, Consumer Price Index
+        - `A+Q.USA+GBR.*` - Annual and Quarterly, USA and UK, all indicators
+        - `*.*.NGDP_RPCH` - All frequencies and countries, Real GDP Growth
+
+        Time filtering is supported via query parameters for IMF.STA datasets.
+      operationId: getData
+      tags:
+        - Data
+      parameters:
+        - name: agency
+          in: path
+          required: true
+          description: The agency owning the dataflow (e.g., IMF.STA, all)
+          schema:
+            type: string
+            example: IMF.STA
+        - name: dataflow_id
+          in: path
+          required: true
+          description: The dataflow identifier (e.g., IFS, GFS, FM, WEO, MFS, BOP)
+          schema:
+            type: string
+            example: IFS
+        - name: key
+          in: path
+          required: true
+          description: Dot-separated dimension key with + for multiple values and * for wildcard
+          schema:
+            type: string
+            example: A.USA.PCPI
+        - name: dimensionAtObservation
+          in: query
+          description: Specify which dimension varies at the observation level
+          schema:
+            type: string
+            default: TIME_PERIOD
+            example: TIME_PERIOD
+        - name: attributes
+          in: query
+          description: Level of attribute detail to include in response
+          schema:
+            type: string
+            default: dsd
+            enum: [none, obs, series, dataset, dsd, all]
+        - name: measures
+          in: query
+          description: Which measures to return
+          schema:
+            type: string
+            default: all
+        - name: 'c[TIME_PERIOD]'
+          in: query
+          description: |
+            Time period filter using SDMX comparison operators.
+            Format: ge:YYYY-{freq}N+le:YYYY-{freq}N
+            Examples: ge:2010-A1+le:2020-A1 (annual), ge:2010-Q1+le:2020-Q4 (quarterly)
+          schema:
+            type: string
+            example: ge:2010-A1+le:2023-A1
+      responses:
+        '200':
+          description: SDMX JSON data message with observations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataMessage'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+components:
+  schemas:
+    Dataflow:
+      type: object
+      description: An IMF dataset definition
+      properties:
+        id:
+          type: string
+          description: Unique dataflow identifier (e.g., IFS, GFS, FM)
+          example: FM
+        name:
+          type: string
+          description: Human-readable dataset name
+          example: Fiscal Monitor
+        description:
+          type: string
+          description: Detailed dataset description
+        version:
+          type: string
+          description: Dataflow version
+          example: 8.0.1
+        agencyID:
+          type: string
+          description: Owning agency identifier
+          example: IMF.STA
+        structure:
+          type: string
+          description: URN reference to the associated data structure definition
+
+    DataStructure:
+      type: object
+      description: Data structure definition for an IMF dataset
+      properties:
+        id:
+          type: string
+          description: Data structure identifier
+        agencyID:
+          type: string
+          description: Owning agency
+        dataStructureComponents:
+          type: object
+          properties:
+            dimensionList:
+              type: object
+              properties:
+                dimensions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Dimension'
+                timeDimensions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Dimension'
+            measureList:
+              type: object
+              properties:
+                measures:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Dimension'
+
+    Dimension:
+      type: object
+      description: A dimension in an IMF dataset structure
+      properties:
+        id:
+          type: string
+          description: Dimension identifier (e.g., COUNTRY, FREQUENCY, TIME_PERIOD)
+          example: COUNTRY
+        position:
+          type: integer
+          description: Position in the dot-separated key string
+          example: 2
+        type:
+          type: string
+          description: Dimension type
+          enum: [Dimension, TimeDimension, Measure]
+        conceptIdentity:
+          type: string
+          description: URN reference to the concept definition
+
+    Codelist:
+      type: object
+      description: A list of valid codes for a dimension
+      properties:
+        id:
+          type: string
+          description: Codelist identifier
+          example: CL_COUNTRY
+        agencyID:
+          type: string
+        codes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Code value
+                example: USA
+              name:
+                type: string
+                description: Human-readable code label
+                example: United States
+
+    DataMessage:
+      type: object
+      description: SDMX 3.0 JSON data message containing observations
+      properties:
+        data:
+          type: object
+          properties:
+            dataSets:
+              type: array
+              items:
+                type: object
+                description: Dataset with series and observations
+            structures:
+              type: array
+              items:
+                type: object
+                description: Structure references for interpreting the data
+        meta:
+          type: object
+          description: Metadata about the response including schema and preparation timestamp
+
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+        correlationId:
+          type: string
+        path:
+          type: string
+
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded (50 requests/second per application)
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

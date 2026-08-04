@@ -1,0 +1,21 @@
+{
+  "provider": "imf",
+  "sources": [
+    "imf-data-api-openapi.yml",
+    "imf-structure-api-openapi.yml",
+    "openapi.yml"
+  ],
+  "outputs": [
+    "imf-data-api-openapi.yml",
+    "imf-structure-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi.yml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "discovered stray spec: openapi.yml"
+  ],
+  "skipped": []
+}
