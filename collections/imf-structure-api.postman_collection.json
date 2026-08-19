@@ -1,0 +1,818 @@
+{
+  "item": [
+    {
+      "id": "d50064aa-3cc1-401e-a1f8-206c09318992",
+      "name": "Structure",
+      "description": {
+        "content": "Retrieve dataset metadata including dataflows, data structures, codelists, and concept schemes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "022ff6d0-a868-4860-b5a1-80d9800af763",
+          "name": "List all available IMF dataflows (datasets)",
+          "request": {
+            "name": "List all available IMF dataflows (datasets)",
+            "description": {
+              "content": "Returns all available dataflow definitions from the IMF SDMX API.\nEach dataflow represents a dataset such as IFS, WEO, FM, GFS, MFS, etc.\nUse the dataflow ID to query data and retrieve data structures.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "structure",
+                "dataflow",
+                "all",
+                "*",
+                "+"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b406024e-8421-40c5-bb69-837b359a97a7",
+              "name": "List of available dataflows",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "dataflow",
+                    "all",
+                    "*",
+                    "+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"dataflows\": [\n      {\n        \"id\": \"FM\",\n        \"name\": \"Fiscal Monitor\",\n        \"description\": \"string\",\n        \"version\": \"8.0.1\",\n        \"agencyID\": \"IMF.STA\",\n        \"structure\": \"string\"\n      },\n      {\n        \"id\": \"FM\",\n        \"name\": \"Fiscal Monitor\",\n        \"description\": \"string\",\n        \"version\": \"8.0.1\",\n        \"agencyID\": \"IMF.STA\",\n        \"structure\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77b8c70c-204a-40b3-8c60-1c9fd63d5f06",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "dataflow",
+                    "all",
+                    "*",
+                    "+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": 1158,\n  \"correlationId\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "283db6e5-3d20-4b6a-b4c1-4858862b328a",
+              "name": "Rate limit exceeded (50 requests/second per application)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "dataflow",
+                    "all",
+                    "*",
+                    "+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "5508"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": 1158,\n  \"correlationId\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ec50f25-d846-4825-901d-392557df59aa",
+          "name": "Retrieve data structure definition (DSD) for a dataflow",
+          "request": {
+            "name": "Retrieve data structure definition (DSD) for a dataflow",
+            "description": {
+              "content": "Returns the data structure definition for a specific dataset, including\nall dimensions, measures, attributes, and their positions.\nUse this to understand how to build query keys for data requests.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "structure",
+                "datastructure",
+                ":agency",
+                ":dsd_id",
+                "+"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agency",
+                  "description": "(Required) The agency that owns the data structure (e.g., IMF.STA, IMF)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dsd_id",
+                  "description": "(Required) The data structure definition identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d34ccc25-f5f0-4d82-9310-4086f6531660",
+              "name": "Data structure definition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "datastructure",
+                    ":agency",
+                    ":dsd_id",
+                    "+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency that owns the data structure (e.g., IMF.STA, IMF)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dsd_id",
+                      "description": "(Required) The data structure definition identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"dataStructures\": [\n      {\n        \"id\": \"string\",\n        \"agencyID\": \"string\",\n        \"dataStructureComponents\": {\n          \"dimensionList\": {\n            \"dimensions\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"timeDimensions\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          \"measureList\": {\n            \"measures\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          }\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"agencyID\": \"string\",\n        \"dataStructureComponents\": {\n          \"dimensionList\": {\n            \"dimensions\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"timeDimensions\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          \"measureList\": {\n            \"measures\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"position\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"conceptIdentity\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae5f3170-59e6-4163-871d-743f5ef80050",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "datastructure",
+                    ":agency",
+                    ":dsd_id",
+                    "+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency that owns the data structure (e.g., IMF.STA, IMF)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dsd_id",
+                      "description": "(Required) The data structure definition identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": 1158,\n  \"correlationId\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffe4555e-5f52-47e7-a091-692bbd086eaf",
+              "name": "Rate limit exceeded (50 requests/second per application)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "datastructure",
+                    ":agency",
+                    ":dsd_id",
+                    "+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency that owns the data structure (e.g., IMF.STA, IMF)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dsd_id",
+                      "description": "(Required) The data structure definition identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "5508"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": 1158,\n  \"correlationId\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4adff51-ead0-4bde-8d5b-c257d5a51946",
+          "name": "Retrieve a codelist for a dimension",
+          "request": {
+            "name": "Retrieve a codelist for a dimension",
+            "description": {
+              "content": "Returns all valid codes and their labels for a specified codelist.\nCodelists are used to identify valid values for dimensions such as\nCOUNTRY (country codes), FREQUENCY (A=Annual, Q=Quarterly, M=Monthly),\nand indicator codes specific to each dataset.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "structure",
+                "codelist",
+                ":agency",
+                ":codelist_id",
+                "+"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agency",
+                  "description": "(Required) The agency that owns the codelist"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codelist_id",
+                  "description": "(Required) The codelist identifier (e.g., CL_COUNTRY, CL_FREQ)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4587b4fa-d3fd-4608-acb6-401d87842f9d",
+              "name": "Codelist with codes and labels",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "codelist",
+                    ":agency",
+                    ":codelist_id",
+                    "+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency that owns the codelist"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codelist_id",
+                      "description": "(Required) The codelist identifier (e.g., CL_COUNTRY, CL_FREQ)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"codelists\": [\n      {\n        \"id\": \"CL_COUNTRY\",\n        \"agencyID\": \"string\",\n        \"codes\": [\n          {\n            \"id\": \"USA\",\n            \"name\": \"United States\"\n          },\n          {\n            \"id\": \"USA\",\n            \"name\": \"United States\"\n          }\n        ]\n      },\n      {\n        \"id\": \"CL_COUNTRY\",\n        \"agencyID\": \"string\",\n        \"codes\": [\n          {\n            \"id\": \"USA\",\n            \"name\": \"United States\"\n          },\n          {\n            \"id\": \"USA\",\n            \"name\": \"United States\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2578841-d1fe-46f9-94ec-bc596c0a95fe",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "codelist",
+                    ":agency",
+                    ":codelist_id",
+                    "+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency that owns the codelist"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codelist_id",
+                      "description": "(Required) The codelist identifier (e.g., CL_COUNTRY, CL_FREQ)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": 1158,\n  \"correlationId\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa274708-8194-4e2f-b430-9da16455365d",
+              "name": "Rate limit exceeded (50 requests/second per application)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "codelist",
+                    ":agency",
+                    ":codelist_id",
+                    "+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency that owns the codelist"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codelist_id",
+                      "description": "(Required) The codelist identifier (e.g., CL_COUNTRY, CL_FREQ)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "5508"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": 1158,\n  \"correlationId\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59d6f41d-c522-404f-b4ac-24ca4f7d4e37",
+          "name": "Retrieve a concept scheme",
+          "request": {
+            "name": "Retrieve a concept scheme",
+            "description": {
+              "content": "Returns concept definitions used to describe the meaning of dimensions\nand attributes in IMF datasets.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "structure",
+                "conceptscheme",
+                ":agency",
+                ":scheme_id",
+                "+"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agency",
+                  "description": "(Required) The agency that owns the concept scheme"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scheme_id",
+                  "description": "(Required) The concept scheme identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bec1338-4a2a-4133-a7c9-9c44c7eca623",
+              "name": "Concept scheme with concept definitions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "conceptscheme",
+                    ":agency",
+                    ":scheme_id",
+                    "+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency that owns the concept scheme"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scheme_id",
+                      "description": "(Required) The concept scheme identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55497ddb-1134-43c1-8d48-34dd64ebcd5a",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "conceptscheme",
+                    ":agency",
+                    ":scheme_id",
+                    "+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency that owns the concept scheme"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scheme_id",
+                      "description": "(Required) The concept scheme identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": 1158,\n  \"correlationId\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.imf.org/external/sdmx/3.0",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4e071c81-3ab8-4d31-8909-c1841083ba49",
+    "name": "IMF SDMX 3.0 Data Structure API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The International Monetary Fund (IMF) SDMX 3.0 Data API provides programmatic access\nto hundreds of IMF statistical datasets. Data is freely available with no authentication\nrequired. Datasets include International Financial Statistics (IFS), World Economic\nOutlook (WEO), Fiscal Monitor (FM), Government Finance Statistics (GFS), Monetary and\nFinancial Statistics (MFS), Balance of Payments (BOP), and many more.\n\nThe API follows the SDMX 3.0 (Statistical Data and Metadata eXchange) standard.\nResponses are available in JSON format.\n\nRate limit: 50 requests per second (application-based via User-Agent header).\n\n\nContact Support:\n Name: IMF Data Help\n Email: sdmx@imf.org",
+      "type": "text/plain"
+    }
+  }
+}

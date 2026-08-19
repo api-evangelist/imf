@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IMF SDMX 3.0 Data API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve data observations from an IMF dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.imf.org/external/sdmx/3.0/data/dataflow/:agency/:dataflow_id/+/:key",
+            "params": [
+              {
+                "name": "agency",
+                "value": "",
+                "type": "path",
+                "description": "The agency owning the dataflow (e.g., IMF.STA, all)"
+              },
+              {
+                "name": "dataflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The dataflow identifier (e.g., IFS, GFS, FM, WEO, MFS, BOP)"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Dot-separated dimension key with + for multiple values and * for wildcard"
+              },
+              {
+                "name": "dimensionAtObservation",
+                "value": "",
+                "type": "query",
+                "description": "Specify which dimension varies at the observation level"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Level of attribute detail to include in response"
+              },
+              {
+                "name": "measures",
+                "value": "",
+                "type": "query",
+                "description": "Which measures to return"
+              },
+              {
+                "name": "c[TIME_PERIOD]",
+                "value": "",
+                "type": "query",
+                "description": "Time period filter using SDMX comparison operators.\nFormat: ge:YYYY-{freq}N+le:YYYY-{freq}N\nExamples: ge:2010-A1+le:2020-A1 (annual), ge:2010-Q1+le:2020-Q4 (quarterly)\n"
+              }
+            ]
+          },
+          "docs": "Returns time-series data observations for the specified dataflow filtered\nby the dimension key. The key is a dot-separated string where each position\ncorresponds to a dimension in the dataset's data structure definition (DSD),\nin positional order. Use '+' to specify multiple values for a dimension and\n'*' or blank to wildcard a dimension.\n\nExamples:\n- `A.USA.PCPI` - Annual, USA, Consumer Price Index\n- `A+Q.USA+GBR.*` - Annual and Quarterly, USA and UK, all indicators\n- `*.*.NGDP_RPCH` - All freq"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

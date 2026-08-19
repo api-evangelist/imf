@@ -1,0 +1,441 @@
+{
+  "item": [
+    {
+      "id": "4d7267e6-a91c-4633-be4a-00c0c50b6ef4",
+      "name": "Data",
+      "description": {
+        "content": "Retrieve actual statistical data observations from IMF datasets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e138880a-a051-4987-a067-7ce191557a93",
+          "name": "Retrieve data observations from an IMF dataset",
+          "request": {
+            "name": "Retrieve data observations from an IMF dataset",
+            "description": {
+              "content": "Returns time-series data observations for the specified dataflow filtered\nby the dimension key. The key is a dot-separated string where each position\ncorresponds to a dimension in the dataset's data structure definition (DSD),\nin positional order. Use '+' to specify multiple values for a dimension and\n'*' or blank to wildcard a dimension.\n\nExamples:\n- `A.USA.PCPI` - Annual, USA, Consumer Price Index\n- `A+Q.USA+GBR.*` - Annual and Quarterly, USA and UK, all indicators\n- `*.*.NGDP_RPCH` - All frequencies and countries, Real GDP Growth\n\nTime filtering is supported via query parameters for IMF.STA datasets.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "dataflow",
+                ":agency",
+                ":dataflow_id",
+                "+",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dimensionAtObservation",
+                  "value": "TIME_PERIOD",
+                  "description": "Specify which dimension varies at the observation level"
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "dsd",
+                  "description": "Level of attribute detail to include in response"
+                },
+                {
+                  "disabled": false,
+                  "key": "measures",
+                  "value": "all",
+                  "description": "Which measures to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "c[TIME_PERIOD]",
+                  "value": "<string>",
+                  "description": "Time period filter using SDMX comparison operators.\nFormat: ge:YYYY-{freq}N+le:YYYY-{freq}N\nExamples: ge:2010-A1+le:2020-A1 (annual), ge:2010-Q1+le:2020-Q4 (quarterly)\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agency",
+                  "description": "(Required) The agency owning the dataflow (e.g., IMF.STA, all)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataflow_id",
+                  "description": "(Required) The dataflow identifier (e.g., IFS, GFS, FM, WEO, MFS, BOP)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Dot-separated dimension key with + for multiple values and * for wildcard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8aaf5630-39ac-42f3-a31a-dbb911a4edee",
+              "name": "SDMX JSON data message with observations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "dataflow",
+                    ":agency",
+                    ":dataflow_id",
+                    "+",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimensionAtObservation",
+                      "value": "TIME_PERIOD"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "dsd"
+                    },
+                    {
+                      "key": "measures",
+                      "value": "all"
+                    },
+                    {
+                      "key": "c[TIME_PERIOD]",
+                      "value": "ge:2010-A1+le:2023-A1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency owning the dataflow (e.g., IMF.STA, all)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataflow_id",
+                      "description": "(Required) The dataflow identifier (e.g., IFS, GFS, FM, WEO, MFS, BOP)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Dot-separated dimension key with + for multiple values and * for wildcard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {},\n  \"meta\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fe77cc9-0835-4599-be5f-9fefc7e60e52",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "dataflow",
+                    ":agency",
+                    ":dataflow_id",
+                    "+",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimensionAtObservation",
+                      "value": "TIME_PERIOD"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "dsd"
+                    },
+                    {
+                      "key": "measures",
+                      "value": "all"
+                    },
+                    {
+                      "key": "c[TIME_PERIOD]",
+                      "value": "ge:2010-A1+le:2023-A1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency owning the dataflow (e.g., IMF.STA, all)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataflow_id",
+                      "description": "(Required) The dataflow identifier (e.g., IFS, GFS, FM, WEO, MFS, BOP)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Dot-separated dimension key with + for multiple values and * for wildcard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": 7247,\n  \"correlationId\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a0a2dc4-7607-42ab-ae28-beb196212535",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "dataflow",
+                    ":agency",
+                    ":dataflow_id",
+                    "+",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimensionAtObservation",
+                      "value": "TIME_PERIOD"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "dsd"
+                    },
+                    {
+                      "key": "measures",
+                      "value": "all"
+                    },
+                    {
+                      "key": "c[TIME_PERIOD]",
+                      "value": "ge:2010-A1+le:2023-A1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency owning the dataflow (e.g., IMF.STA, all)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataflow_id",
+                      "description": "(Required) The dataflow identifier (e.g., IFS, GFS, FM, WEO, MFS, BOP)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Dot-separated dimension key with + for multiple values and * for wildcard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": 7247,\n  \"correlationId\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7ae3aa7-7931-4d56-b9d6-9442a36c30b2",
+              "name": "Rate limit exceeded (50 requests/second per application)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "dataflow",
+                    ":agency",
+                    ":dataflow_id",
+                    "+",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimensionAtObservation",
+                      "value": "TIME_PERIOD"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "dsd"
+                    },
+                    {
+                      "key": "measures",
+                      "value": "all"
+                    },
+                    {
+                      "key": "c[TIME_PERIOD]",
+                      "value": "ge:2010-A1+le:2023-A1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agency",
+                      "description": "(Required) The agency owning the dataflow (e.g., IMF.STA, all)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataflow_id",
+                      "description": "(Required) The dataflow identifier (e.g., IFS, GFS, FM, WEO, MFS, BOP)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Dot-separated dimension key with + for multiple values and * for wildcard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "3639"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": 7247,\n  \"correlationId\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.imf.org/external/sdmx/3.0",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fd2b61b4-dde2-4f00-b602-7e8f4876aaf6",
+    "name": "IMF SDMX 3.0 Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The International Monetary Fund (IMF) SDMX 3.0 Data API provides programmatic access\nto hundreds of IMF statistical datasets. Data is freely available with no authentication\nrequired. Datasets include International Financial Statistics (IFS), World Economic\nOutlook (WEO), Fiscal Monitor (FM), Government Finance Statistics (GFS), Monetary and\nFinancial Statistics (MFS), Balance of Payments (BOP), and many more.\n\nThe API follows the SDMX 3.0 (Statistical Data and Metadata eXchange) standard.\nResponses are available in JSON format.\n\nRate limit: 50 requests per second (application-based via User-Agent header).\n\n\nContact Support:\n Name: IMF Data Help\n Email: sdmx@imf.org",
+      "type": "text/plain"
+    }
+  }
+}

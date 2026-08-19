@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IMF SDMX 3.0 Data Structure API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Structure",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all available IMF dataflows (datasets)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.imf.org/external/sdmx/3.0/structure/dataflow/all/*/+",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns all available dataflow definitions from the IMF SDMX API.\nEach dataflow represents a dataset such as IFS, WEO, FM, GFS, MFS, etc.\nUse the dataflow ID to query data and retrieve data structures.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve data structure definition (DSD) for a dataflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.imf.org/external/sdmx/3.0/structure/datastructure/:agency/:dsd_id/+",
+            "params": [
+              {
+                "name": "agency",
+                "value": "",
+                "type": "path",
+                "description": "The agency that owns the data structure (e.g., IMF.STA, IMF)"
+              },
+              {
+                "name": "dsd_id",
+                "value": "",
+                "type": "path",
+                "description": "The data structure definition identifier"
+              }
+            ]
+          },
+          "docs": "Returns the data structure definition for a specific dataset, including\nall dimensions, measures, attributes, and their positions.\nUse this to understand how to build query keys for data requests.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a codelist for a dimension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.imf.org/external/sdmx/3.0/structure/codelist/:agency/:codelist_id/+",
+            "params": [
+              {
+                "name": "agency",
+                "value": "",
+                "type": "path",
+                "description": "The agency that owns the codelist"
+              },
+              {
+                "name": "codelist_id",
+                "value": "",
+                "type": "path",
+                "description": "The codelist identifier (e.g., CL_COUNTRY, CL_FREQ)"
+              }
+            ]
+          },
+          "docs": "Returns all valid codes and their labels for a specified codelist.\nCodelists are used to identify valid values for dimensions such as\nCOUNTRY (country codes), FREQUENCY (A=Annual, Q=Quarterly, M=Monthly),\nand indicator codes specific to each dataset.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a concept scheme",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.imf.org/external/sdmx/3.0/structure/conceptscheme/:agency/:scheme_id/+",
+            "params": [
+              {
+                "name": "agency",
+                "value": "",
+                "type": "path",
+                "description": "The agency that owns the concept scheme"
+              },
+              {
+                "name": "scheme_id",
+                "value": "",
+                "type": "path",
+                "description": "The concept scheme identifier"
+              }
+            ]
+          },
+          "docs": "Returns concept definitions used to describe the meaning of dimensions\nand attributes in IMF datasets.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
