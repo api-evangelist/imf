@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: IMF SDMX 3.0 Data Structure API
   description: 'The International Monetary Fund (IMF) SDMX 3.0 Data API provides programmatic access
@@ -210,54 +210,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Dimension:
-      type: object
-      description: A dimension in an IMF dataset structure
-      properties:
-        id:
-          type: string
-          description: Dimension identifier (e.g., COUNTRY, FREQUENCY, TIME_PERIOD)
-          example: COUNTRY
-        position:
-          type: integer
-          description: Position in the dot-separated key string
-          example: 2
-        type:
-          type: string
-          description: Dimension type
-          enum:
-          - Dimension
-          - TimeDimension
-          - Measure
-        conceptIdentity:
-          type: string
-          description: URN reference to the concept definition
-    Dataflow:
-      type: object
-      description: An IMF dataset definition
-      properties:
-        id:
-          type: string
-          description: Unique dataflow identifier (e.g., IFS, GFS, FM)
-          example: FM
-        name:
-          type: string
-          description: Human-readable dataset name
-          example: Fiscal Monitor
-        description:
-          type: string
-          description: Detailed dataset description
-        version:
-          type: string
-          description: Dataflow version
-          example: 8.0.1
-        agencyID:
-          type: string
-          description: Owning agency identifier
-          example: IMF.STA
-        structure:
-          type: string
-          description: URN reference to the associated data structure definition
     DataStructure:
       type: object
       description: Data structure definition for an IMF dataset
@@ -289,17 +241,6 @@ components:
                   type: array
                   items:
                     $ref: '#/components/schemas/Dimension'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        code:
-          type: integer
-        correlationId:
-          type: string
-        path:
-          type: string
     Codelist:
       type: object
       description: A list of valid codes for a dimension
@@ -323,18 +264,66 @@ components:
                 type: string
                 description: Human-readable code label
                 example: United States
+    Dataflow:
+      type: object
+      description: An IMF dataset definition
+      properties:
+        id:
+          type: string
+          description: Unique dataflow identifier (e.g., IFS, GFS, FM)
+          example: FM
+        name:
+          type: string
+          description: Human-readable dataset name
+          example: Fiscal Monitor
+        description:
+          type: string
+          description: Detailed dataset description
+        version:
+          type: string
+          description: Dataflow version
+          example: 8.0.1
+        agencyID:
+          type: string
+          description: Owning agency identifier
+          example: IMF.STA
+        structure:
+          type: string
+          description: URN reference to the associated data structure definition
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+        correlationId:
+          type: string
+        path:
+          type: string
+    Dimension:
+      type: object
+      description: A dimension in an IMF dataset structure
+      properties:
+        id:
+          type: string
+          description: Dimension identifier (e.g., COUNTRY, FREQUENCY, TIME_PERIOD)
+          example: COUNTRY
+        position:
+          type: integer
+          description: Position in the dot-separated key string
+          example: 2
+        type:
+          type: string
+          description: Dimension type
+          enum:
+          - Dimension
+          - TimeDimension
+          - Measure
+        conceptIdentity:
+          type: string
+          description: URN reference to the concept definition
   responses:
-    TooManyRequests:
-      description: Rate limit exceeded (50 requests/second per application)
-      headers:
-        Retry-After:
-          schema:
-            type: integer
-          description: Seconds to wait before retrying
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid request parameters
       content:
@@ -343,6 +332,17 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded (50 requests/second per application)
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying
       content:
         application/json:
           schema:
