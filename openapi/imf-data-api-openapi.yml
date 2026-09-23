@@ -3,23 +3,7 @@ info:
   title: IMF SDMX 3.0 Data API
   description: 'The International Monetary Fund (IMF) SDMX 3.0 Data API provides programmatic access
 
-    to hundreds of IMF statistical datasets. Data is freely available with no authentication
-
-    required. Datasets include International Financial Statistics (IFS), World Economic
-
-    Outlook (WEO), Fiscal Monitor (FM), Government Finance Statistics (GFS), Monetary and
-
-    Financial Statistics (MFS), Balance of Payments (BOP), and many more.
-
-
-    The API follows the SDMX 3.0 (Statistical Data and Metadata eXchange) standard.
-
-    Responses are available in JSON format.
-
-
-    Rate limit: 50 requests per second (application-based via User-Agent header).
-
-    '
+    to hundreds of IMF statistical datasets.'
   version: '3.0'
   contact:
     name: IMF Data Help
@@ -61,9 +45,7 @@ paths:
         - `*.*.NGDP_RPCH` - All frequencies and countries, Real GDP Growth
 
 
-        Time filtering is supported via query parameters for IMF.STA datasets.
-
-        '
+        Time filtering is supported via query parameters for IMF.STA datasets.'
       operationId: getData
       tags:
       - Data
@@ -142,6 +124,17 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+        correlationId:
+          type: string
+        path:
+          type: string
     DataMessage:
       type: object
       description: SDMX 3.0 JSON data message containing observations
@@ -162,26 +155,9 @@ components:
         meta:
           type: object
           description: Metadata about the response including schema and preparation timestamp
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        code:
-          type: integer
-        correlationId:
-          type: string
-        path:
-          type: string
   responses:
     BadRequest:
       description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
       content:
         application/json:
           schema:
@@ -193,6 +169,12 @@ components:
           schema:
             type: integer
           description: Seconds to wait before retrying
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:

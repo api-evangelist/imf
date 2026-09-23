@@ -3,23 +3,7 @@ info:
   title: IMF SDMX 3.0 Data Structure API
   description: 'The International Monetary Fund (IMF) SDMX 3.0 Data API provides programmatic access
 
-    to hundreds of IMF statistical datasets. Data is freely available with no authentication
-
-    required. Datasets include International Financial Statistics (IFS), World Economic
-
-    Outlook (WEO), Fiscal Monitor (FM), Government Finance Statistics (GFS), Monetary and
-
-    Financial Statistics (MFS), Balance of Payments (BOP), and many more.
-
-
-    The API follows the SDMX 3.0 (Statistical Data and Metadata eXchange) standard.
-
-    Responses are available in JSON format.
-
-
-    Rate limit: 50 requests per second (application-based via User-Agent header).
-
-    '
+    to hundreds of IMF statistical datasets.'
   version: '3.0'
   contact:
     name: IMF Data Help
@@ -45,9 +29,7 @@ paths:
 
         Each dataflow represents a dataset such as IFS, WEO, FM, GFS, MFS, etc.
 
-        Use the dataflow ID to query data and retrieve data structures.
-
-        '
+        Use the dataflow ID to query data and retrieve data structures.'
       operationId: listDataflows
       tags:
       - Structure
@@ -84,9 +66,7 @@ paths:
 
         all dimensions, measures, attributes, and their positions.
 
-        Use this to understand how to build query keys for data requests.
-
-        '
+        Use this to understand how to build query keys for data requests.'
       operationId: getDataStructure
       tags:
       - Structure
@@ -133,9 +113,7 @@ paths:
 
         COUNTRY (country codes), FREQUENCY (A=Annual, Q=Quarterly, M=Monthly),
 
-        and indicator codes specific to each dataset.
-
-        '
+        and indicator codes specific to each dataset.'
       operationId: getCodelist
       tags:
       - Structure
@@ -178,9 +156,7 @@ paths:
       summary: Retrieve a concept scheme
       description: 'Returns concept definitions used to describe the meaning of dimensions
 
-        and attributes in IMF datasets.
-
-        '
+        and attributes in IMF datasets.'
       operationId: getConceptScheme
       tags:
       - Structure
@@ -210,6 +186,65 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+        correlationId:
+          type: string
+        path:
+          type: string
+    Dataflow:
+      type: object
+      description: An IMF dataset definition
+      properties:
+        id:
+          type: string
+          description: Unique dataflow identifier (e.g., IFS, GFS, FM)
+          example: FM
+        name:
+          type: string
+          description: Human-readable dataset name
+          example: Fiscal Monitor
+        description:
+          type: string
+          description: Detailed dataset description
+        version:
+          type: string
+          description: Dataflow version
+          example: 8.0.1
+        agencyID:
+          type: string
+          description: Owning agency identifier
+          example: IMF.STA
+        structure:
+          type: string
+          description: URN reference to the associated data structure definition
+    Dimension:
+      type: object
+      description: A dimension in an IMF dataset structure
+      properties:
+        id:
+          type: string
+          description: Dimension identifier (e.g., COUNTRY, FREQUENCY, TIME_PERIOD)
+          example: COUNTRY
+        position:
+          type: integer
+          description: Position in the dot-separated key string
+          example: 2
+        type:
+          type: string
+          description: Dimension type
+          enum:
+          - Dimension
+          - TimeDimension
+          - Measure
+        conceptIdentity:
+          type: string
+          description: URN reference to the concept definition
     DataStructure:
       type: object
       description: Data structure definition for an IMF dataset
@@ -264,74 +299,9 @@ components:
                 type: string
                 description: Human-readable code label
                 example: United States
-    Dataflow:
-      type: object
-      description: An IMF dataset definition
-      properties:
-        id:
-          type: string
-          description: Unique dataflow identifier (e.g., IFS, GFS, FM)
-          example: FM
-        name:
-          type: string
-          description: Human-readable dataset name
-          example: Fiscal Monitor
-        description:
-          type: string
-          description: Detailed dataset description
-        version:
-          type: string
-          description: Dataflow version
-          example: 8.0.1
-        agencyID:
-          type: string
-          description: Owning agency identifier
-          example: IMF.STA
-        structure:
-          type: string
-          description: URN reference to the associated data structure definition
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        code:
-          type: integer
-        correlationId:
-          type: string
-        path:
-          type: string
-    Dimension:
-      type: object
-      description: A dimension in an IMF dataset structure
-      properties:
-        id:
-          type: string
-          description: Dimension identifier (e.g., COUNTRY, FREQUENCY, TIME_PERIOD)
-          example: COUNTRY
-        position:
-          type: integer
-          description: Position in the dot-separated key string
-          example: 2
-        type:
-          type: string
-          description: Dimension type
-          enum:
-          - Dimension
-          - TimeDimension
-          - Measure
-        conceptIdentity:
-          type: string
-          description: URN reference to the concept definition
   responses:
     BadRequest:
       description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
       content:
         application/json:
           schema:
@@ -343,6 +313,12 @@ components:
           schema:
             type: integer
           description: Seconds to wait before retrying
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
