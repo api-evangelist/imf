@@ -123,6 +123,30 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded (50 requests/second per application)
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -155,30 +179,6 @@ components:
         meta:
           type: object
           description: Metadata about the response including schema and preparation timestamp
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Rate limit exceeded (50 requests/second per application)
-      headers:
-        Retry-After:
-          schema:
-            type: integer
-          description: Seconds to wait before retrying
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
 externalDocs:
   description: IMF Data Help - Using JSON RESTful Web Service
   url: https://datahelp.imf.org/knowledgebase/articles/667294-using-json-restful-web-service
