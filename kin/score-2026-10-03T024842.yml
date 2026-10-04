@@ -1,22 +1,20 @@
-# Kin Score artifact — imf — 2026-09-02T211804
+# Kin Score artifact — imf — 2026-10-03T024842
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: imf
-  schema_version: 0.18.0
-  scored_at: '2026-09-02'
-  run_ts: 2026-09-02T211804
-  composite: 36.1
+  schema_version: 0.23.0
+  scored_at: '2026-10-03'
+  run_ts: 2026-10-03T024842
+  composite: 34.0
   band: thin
   facets:
-    discoverability: 68.5
-    contract_quality: 59.5
-    governance: 9.8
-    operational_transparency: 42.1
-    developer_ergonomics: 7.1
-    commercial_clarity: 39.5
+    discoverability: 66.1
+    contract_quality: 54.3
     contract_governance: 9.8
-    access_clarity: 39.5
+    operational_transparency: 40.0
+    developer_ergonomics: 7.1
+    access_clarity: 37.4
   agent_readiness:
     score: 22.9
     band: agent-aware
@@ -42,9 +40,9 @@ kin_score:
       agentic_commerce: false
   regulatory:
     applies: true
-    regime: Insurance
-    regime_id: insurance
-    score: 16.7
+    regime: Payments
+    regime_id: payments
+    score: 9.8
     matched_via: tags
   provenance:
     agentic_access: derived
