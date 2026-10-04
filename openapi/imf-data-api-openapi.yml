@@ -124,17 +124,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        code:
-          type: integer
-        correlationId:
-          type: string
-        path:
-          type: string
     DataMessage:
       type: object
       description: SDMX 3.0 JSON data message containing observations
@@ -155,14 +144,20 @@ components:
         meta:
           type: object
           description: Metadata about the response including schema and preparation timestamp
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+        correlationId:
+          type: string
+        path:
+          type: string
   responses:
-    TooManyRequests:
-      description: Rate limit exceeded (50 requests/second per application)
-      headers:
-        Retry-After:
-          schema:
-            type: integer
-          description: Seconds to wait before retrying
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -173,8 +168,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
+    TooManyRequests:
+      description: Rate limit exceeded (50 requests/second per application)
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying
       content:
         application/json:
           schema:

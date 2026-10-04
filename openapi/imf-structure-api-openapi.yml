@@ -186,17 +186,28 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
+    Dimension:
       type: object
+      description: A dimension in an IMF dataset structure
       properties:
-        message:
+        id:
           type: string
-        code:
+          description: Dimension identifier (e.g., COUNTRY, FREQUENCY, TIME_PERIOD)
+          example: COUNTRY
+        position:
           type: integer
-        correlationId:
+          description: Position in the dot-separated key string
+          example: 2
+        type:
           type: string
-        path:
+          description: Dimension type
+          enum:
+          - Dimension
+          - TimeDimension
+          - Measure
+        conceptIdentity:
           type: string
+          description: URN reference to the concept definition
     Dataflow:
       type: object
       description: An IMF dataset definition
@@ -223,6 +234,40 @@ components:
         structure:
           type: string
           description: URN reference to the associated data structure definition
+    Codelist:
+      type: object
+      description: A list of valid codes for a dimension
+      properties:
+        id:
+          type: string
+          description: Codelist identifier
+          example: CL_COUNTRY
+        agencyID:
+          type: string
+        codes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Code value
+                example: USA
+              name:
+                type: string
+                description: Human-readable code label
+                example: United States
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+        correlationId:
+          type: string
+        path:
+          type: string
     DataStructure:
       type: object
       description: Data structure definition for an IMF dataset
@@ -254,59 +299,9 @@ components:
                   type: array
                   items:
                     $ref: '#/components/schemas/Dimension'
-    Codelist:
-      type: object
-      description: A list of valid codes for a dimension
-      properties:
-        id:
-          type: string
-          description: Codelist identifier
-          example: CL_COUNTRY
-        agencyID:
-          type: string
-        codes:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Code value
-                example: USA
-              name:
-                type: string
-                description: Human-readable code label
-                example: United States
-    Dimension:
-      type: object
-      description: A dimension in an IMF dataset structure
-      properties:
-        id:
-          type: string
-          description: Dimension identifier (e.g., COUNTRY, FREQUENCY, TIME_PERIOD)
-          example: COUNTRY
-        position:
-          type: integer
-          description: Position in the dot-separated key string
-          example: 2
-        type:
-          type: string
-          description: Dimension type
-          enum:
-          - Dimension
-          - TimeDimension
-          - Measure
-        conceptIdentity:
-          type: string
-          description: URN reference to the concept definition
   responses:
-    TooManyRequests:
-      description: Rate limit exceeded (50 requests/second per application)
-      headers:
-        Retry-After:
-          schema:
-            type: integer
-          description: Seconds to wait before retrying
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -317,8 +312,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
+    TooManyRequests:
+      description: Rate limit exceeded (50 requests/second per application)
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying
       content:
         application/json:
           schema:
