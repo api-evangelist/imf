@@ -1,3 +1,8 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (dated 2026-06-13 by the file itself), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
+generated: '2026-06-13'
 name: IMF Data API Plans and Pricing
 description: The IMF Data API is a free, publicly available service provided by the International Monetary Fund. There are no paid tiers or subscription plans. All data is accessible at no cost as part of the IMF's mandate to provide open access to international financial and economic statistics.
 url: https://www.imf.org/en/Data
@@ -34,3 +39,16 @@ plans:
       - Public Sector Balance Sheet (PSBS)
       - Producer Price Index (PPI)
       - Coordinated Portfolio Investment Survey (CPIS)
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: Public Access
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
